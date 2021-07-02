@@ -1,6 +1,8 @@
 name: Update All Dependencies
+
 on:
   workflow_dispatch:
+
 jobs:
   update:
     runs-on: ubuntu-latest

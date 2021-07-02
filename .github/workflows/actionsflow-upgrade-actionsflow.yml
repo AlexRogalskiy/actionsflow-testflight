@@ -1,8 +1,10 @@
 name: Upgrade Local Actionsflow
+
 on:
   workflow_dispatch:
   repository_dispatch:
-    types: [new_version_with_actionsflow]
+    types: [ new_version_with_actionsflow ]
+
 jobs:
   update:
     runs-on: ubuntu-latest

@@ -1,6 +1,8 @@
 name: Reset Actionsflow Cache
+
 on:
   workflow_dispatch:
+
 jobs:
   reset:
     runs-on: ubuntu-latest
