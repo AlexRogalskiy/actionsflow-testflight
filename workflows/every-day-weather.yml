@@ -25,19 +25,32 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
-          WEATHER_DATA: ${{ on.weather.outputs }}
+          WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
           LONGITUDE: ${{ on.weather.outputs.lon }}
           LATITUDE: ${{ on.weather.outputs.lat }}
-          CURRENT: ${{ toJSON(on.weather.outputs.current) }}
-          WEATHER: ${{ toJSON(on.weather.outputs.current.weather[0]) }}
-          DAILY_TEMPERATURE: ${{ toJSON(on.weather.outputs.daily[0].temp) }}
+          TIMEZONE: ${{ on.weather.outputs.timezone }}
+          CURRENT_TEMP: ${{ on.weather.outputs.current.temp }}
+          CURRENT_FEELS_LIKE: ${{ on.weather.outputs.current.feels_like }}
+          CURRENT_PRESSURE: ${{ on.weather.outputs.current.pressure }}
+          CURRENT_HUMIDITY: ${{ on.weather.outputs.current.humidity }}
+          CURRENT_UVI: ${{ on.weather.outputs.current.uvi }}
+          CURRENT_VISIBILITY: ${{ on.weather.outputs.current.visibility }}
+          CURRENT_CLOUDS: ${{ on.weather.outputs.current.clouds }}
+          CURRENT_SUNRISE: ${{ on.weather.outputs.current.sunrise }}
+          CURRENT_SUNSET: ${{ on.weather.outputs.current.sunset }}
+          CURRENT_WIND_SPEED: ${{ on.weather.outputs.current.wind_speed }}
+          CURRENT_WIND_DEG: ${{ on.weather.outputs.current.wind_deg }}
+          WEATHER_MAIN: ${{ on.weather.outputs.current.weather[0].main }}
+          WEATHER_DESCRIPTION: ${{ on.weather.outputs.current.weather[0].description }}
+          DAILY_TEMP_MIN: ${{ on.weather.outputs.daily[0].temp.min }}
+          DAILY_TEMP_MAX: ${{ on.weather.outputs.daily[0].temp.max }}
         with:
           script: |
             /**
              * Process env variables
              * @type {string[]}
              */
-            const { WEATHER_DATA, CURRENT, WEATHER, DAILY_TEMPERATURE } = process.env
+            const { WEATHER_DATA, LONGITUDE, LATITUDE, TIMEZONE, CURRENT_TEMP, CURRENT_FEELS_LIKE, CURRENT_PRESSURE, CURRENT_HUMIDITY, CURRENT_UVI, CURRENT_VISIBILITY, CURRENT_CLOUDS, CURRENT_WIND_SPEED, CURRENT_WIND_DEG, CURRENT_SUNRISE, CURRENT_SUNSET, WEATHER_MAIN, WEATHER_DESCRIPTION, DAILY_TEMP_MIN, DAILY_TEMP_MAX } = process.env
 
             /**
              * Side directions
@@ -79,45 +92,25 @@ jobs:
               return new Date(value * 1000).toLocaleString(LOCALE, DATE_FORMAT);
             };
 
-            //console.log(JSON.stringify(WEATHER_DATA));
+            console.log(JSON.stringify(WEATHER_DATA));
 
-            const longitude = WEATHER_DATA.lon;
-            console.log(longitude);
-            console.log(JSON.parse(JSON.stringify(WEATHER_DATA)).lon);
-            const latitude = WEATHER_DATA.lat;
-            const timezone = WEATHER_DATA.timezone;
+            const wind = Math.round(CURRENT_WIND_SPEED);
+            const windDirection = formatSideDirection(CURRENT_WIND_DEG);
 
-            const main = WEATHER.main;
-            const description = WEATHER.description;
-
-            const tempMin = DAILY_TEMPERATURE.min;
-            const tempMax = DAILY_TEMPERATURE.max;
-
-            const temperature = Math.round(CURRENT.temp);
-            const temperatureLike = Math.round(CURRENT.feels_like);
-            const pressure = Math.round(CURRENT.pressure);
-            const humidity = Math.round(CURRENT.humidity);
-            const visibility = Math.round(CURRENT.visibility);
-            const clouds = Math.round(CURRENT.clouds);
-            const uvi = Math.round(CURRENT.uvi);
-
-            const wind = Math.round(CURRENT.wind_speed);
-            const windDirection = formatSideDirection(CURRENT.wind_deg);
-
-            const sunrise = formatDateByPattern(CURRENT.sunrise);
-            const sunset = formatDateByPattern(CURRENT.sunset);
+            const sunrise = formatDateByPattern(CURRENT_SUNRISE);
+            const sunset = formatDateByPattern(CURRENT_SUNSET);
 
             let result = '';
             result += '---\n';
             result += `Currently, the weather in <Saint-Petersburg> is:\n\n`;
-            result += `location: [lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}],\n`;
-            result += `temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,\n`;
-            result += `humidity: ${humidity}%,\n`;
-            result += `pressure: ${pressure} (mbar),\n`;
-            result += `visibility: ${visibility},\n`;
-            result += `uvi: ${uvi},\n`;
+            result += `location: [lon: ${LONGITUDE}, lat: ${LATITUDE}, timezone: ${TIMEZONE}],\n`;
+            result += `temperature: ${CURRENT_TEMP}°C [${DAILY_TEMP_MIN}-${DAILY_TEMP_MAX}°C] (${WEATHER_MAIN}, ${WEATHER_DESCRIPTION}), fells like ${CURRENT_FEELS_LIKE}°C,\n`;
+            result += `humidity: ${CURRENT_HUMIDITY}%,\n`;
+            result += `pressure: ${CURRENT_PRESSURE} (mbar),\n`;
+            result += `visibility: ${CURRENT_VISIBILITY},\n`;
+            result += `uvi: ${CURRENT_UVI},\n`;
             result += `wind: /${windDirection}/ ${wind} (m/s),\n`;
-            result += `cloudy: ${clouds}%,\n\n`;
+            result += `cloudy: ${CURRENT_CLOUDS}%,\n\n`;
             result += `today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.`;
             result += '---\n';
 
