@@ -21,13 +21,6 @@ jobs:
           script: |
             console.log(context)
 
-      - name: View weather attributes
-        uses: actions/github-script@v4
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          script: |
-            console.log(JSON.stringify(${{ on.weather.outputs }}))
-
       - name: Prepare a telegram message
         uses: actions/github-script@v4
         id: message

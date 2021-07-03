@@ -3,6 +3,8 @@ const config = require('./config');
 module.exports = () => {
     const {WEATHER_DATA} = process.env
 
+    console.log(JSON.stringify(WEATHER_DATA))
+
     const data = JSON.parse(WEATHER_DATA);
 
     const longitude = data.current.coord.lon;
