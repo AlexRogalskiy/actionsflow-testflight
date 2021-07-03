@@ -25,7 +25,7 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
-          W: ${{ on.weather.outputs }}
+          W: ${{ toJSON(on.weather.outputs) }}
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
           LONGITUDE: ${{ on.weather.outputs.lon }}
           LATITUDE: ${{ on.weather.outputs.lat }}
