@@ -28,8 +28,91 @@ jobs:
           WEATHER_DATA: '${{ on.weather.outputs }}'
         with:
           script: |
-            const script = require('./weather')
-            return script()
+            /**
+             * Process env variables
+             * @type {string[]}
+             */
+            const {WEATHER_DATA} = process.env
+
+            /**
+             * Side directions
+             * @type {string[]}
+             */
+            const DIRECTIONS = ['north', 'north-west', 'west', 'south-west', 'south', 'south-east', 'east', 'north-east'];
+
+            /**
+             * Locale
+             * @type {string}
+             */
+            const LOCALE = 'en-GB';
+
+            /**
+             * Date format
+             * @type {{hour: string, timeZone: string, minute: string}}
+             */
+            const DATE_FORMAT = {
+                hour: '2-digit',
+                minute: '2-digit',
+                timeZone: 'Europe/Moscow',
+            };
+
+            /**
+            * Returns formatted side direction by input angle in degrees
+            * @param angle initial input angle in degrees to calculate by
+            * @returns {string} formatted side direction
+            */
+            const formatSideDirection = value => {
+                return config.DIRECTIONS[Math.round(((value %= 360) < 0 ? value + 360 : value) / 45) % 8];
+            };
+
+            /**
+            * Returns formatted date by input date/time pattern
+            * @param value initial input date to format
+            * @returns {string} short formatted date
+            */
+            const formatDateByPattern = value => {
+              return new Date(value * 1000).toLocaleString(config.LOCALE, config.DATE_FORMAT);
+            };
+
+            console.log(JSON.stringify(WEATHER_DATA))
+
+            const data = JSON.parse(WEATHER_DATA);
+
+            const longitude = data.current.coord.lon;
+            const latitude = data.current.coord.lat;
+
+            const main = data.current.weather[0].main;
+            const description = data.current.weather[0].description;
+
+            const tempMin = data.daily[0].temp.min;
+            const tempMax = data.daily[0].temp.max;
+
+            const temperature = Math.round(data.current.feels_like);
+            const pressure = Math.round(data.current.pressure);
+            const humidity = Math.round(data.current.humidity);
+            const clouds = Math.round(data.current.clouds.all);
+            const wind = Math.round(data.current.wind.speed);
+            const uvi = Math.round(data.current.uvi);
+
+            const windDirection = formatSideDirection(data.current.wind.deg);
+
+            const sunrise = formatDateByPattern(data.current.sys.sunrise);
+            const sunset = formatDateByPattern(data.current.sys.sunset);
+
+            return `
+                Currently, the weather in Saint-Petersburg (lon: ${longitude}, lat: ${latitude}) is:
+
+                temperature: ${tempMin}-${tempMax}°C (${main}, ${description}), fells like ${temperature}°C,
+
+                humidity: ${humidity}%,
+                pressure: ${pressure} (mbar),
+                uvi: ${uvi},
+
+                wind: /${windDirection}/ ${wind} (m/s),
+                cloudy: ${clouds}%,
+
+                today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.
+            `;
           result-encoding: string
 
       - name: Send a telegram message
