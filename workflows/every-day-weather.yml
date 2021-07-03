@@ -25,7 +25,7 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
-          WEATHER_DATA: ${{ on.weather.outputs }}
+          WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
         with:
           script: |
             /**
@@ -75,6 +75,7 @@ jobs:
             };
 
             console.log(Object.getOwnPropertyNames(WEATHER_DATA));
+            console.log(JSON.stringify(WEATHER_DATA));
             const data = WEATHER_DATA;
 
             const longitude = data.current.coord.lon;
