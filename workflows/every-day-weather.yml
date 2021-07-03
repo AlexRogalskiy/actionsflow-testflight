@@ -34,7 +34,7 @@ jobs:
              * Process env variables
              * @type {string[]}
              */
-            const {WEATHER_DATA} = process.env
+            const { WEATHER_DATA, CURRENT, DAILY } = process.env
 
             /**
              * Side directions
