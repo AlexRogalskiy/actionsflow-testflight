@@ -80,6 +80,8 @@ jobs:
             console.log(JSON.stringify(WEATHER_DATA));
 
             const longitude = WEATHER_DATA.lon;
+            console.log(longitude);
+            console.log(JSON.parse(JSON.stringify(WEATHER_DATA)).lon);
             const latitude = WEATHER_DATA.lat;
             const timezone = WEATHER_DATA.timezone;
 
@@ -104,7 +106,9 @@ jobs:
             const sunset = formatDateByPattern(CURRENT.sunset);
 
             let result = '';
-            result += `Currently, the weather in <= Saint-Petersburg => (lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}) is:\n\n`;
+            result += '---\n';
+            result += `Currently, the weather in <Saint-Petersburg> is:\n\n`;
+            result += `location: [lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}],\n`;
             result += `temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,\n`;
             result += `humidity: ${humidity}%,\n`;
             result += `pressure: ${pressure} (mbar),\n`;
@@ -112,7 +116,8 @@ jobs:
             result += `uvi: ${uvi},\n`;
             result += `wind: /${windDirection}/ ${wind} (m/s),\n`;
             result += `cloudy: ${clouds}%,\n\n`;
-            result += `today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.\n`;
+            result += `today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.`;
+            result += '---\n';
 
             return result;
           result-encoding: string
