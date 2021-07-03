@@ -26,7 +26,8 @@ jobs:
         id: message
         env:
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
-          DD: ${{ toJSON(on.weather.outputs.current) }}
+          CURRENT: ${{ toJSON(on.weather.outputs.current) }}
+          DAILY: ${{ toJSON(on.weather.outputs.daily) }}
         with:
           script: |
             /**
@@ -81,26 +82,25 @@ jobs:
             const latitude = WEATHER_DATA.lat;
             const timezone = WEATHER_DATA.timezone;
 
-            console.log(process.env.DD);
-            const main = WEATHER_DATA.current.weather[0].main;
-            const description = WEATHER_DATA.current.weather[0].description;
+            const main = CURRENT.weather[0].main;
+            const description = CURRENT.weather[0].description;
 
-            const tempMin = WEATHER_DATA.daily[0].temp.min;
-            const tempMax = WEATHER_DATA.daily[0].temp.max;
+            const tempMin = DAILY[0].temp.min;
+            const tempMax = DAILY[0].temp.max;
 
-            const temperature = Math.round(WEATHER_DATA.current.temp);
-            const temperatureLike = Math.round(WEATHER_DATA.current.feels_like);
-            const pressure = Math.round(WEATHER_DATA.current.pressure);
-            const humidity = Math.round(WEATHER_DATA.current.humidity);
-            const visibility = Math.round(WEATHER_DATA.current.visibility);
-            const clouds = Math.round(WEATHER_DATA.current.clouds);
-            const uvi = Math.round(WEATHER_DATA.current.uvi);
+            const temperature = Math.round(CURRENT.temp);
+            const temperatureLike = Math.round(CURRENT.feels_like);
+            const pressure = Math.round(CURRENT.pressure);
+            const humidity = Math.round(CURRENT.humidity);
+            const visibility = Math.round(CURRENT.visibility);
+            const clouds = Math.round(CURRENT.clouds);
+            const uvi = Math.round(CURRENT.uvi);
 
-            const wind = Math.round(WEATHER_DATA.current.wind_speed);
-            const windDirection = formatSideDirection(WEATHER_DATA.current.wind_deg);
+            const wind = Math.round(CURRENT.wind_speed);
+            const windDirection = formatSideDirection(CURRENT.wind_deg);
 
-            const sunrise = formatDateByPattern(WEATHER_DATA.current.sunrise);
-            const sunset = formatDateByPattern(WEATHER_DATA.current.sunset);
+            const sunrise = formatDateByPattern(CURRENT.sunrise);
+            const sunset = formatDateByPattern(CURRENT.sunset);
 
             return `
                 Currently, the weather in <= Saint-Petersburg => (lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}) is:
