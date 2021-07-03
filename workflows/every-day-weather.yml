@@ -25,7 +25,9 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
-          WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
+          WEATHER_DATA: ${{ on.weather.outputs }}
+          LONGITUDE: ${{ on.weather.outputs.lon }}
+          LATITUDE: ${{ on.weather.outputs.lat }}
           CURRENT: ${{ toJSON(on.weather.outputs.current) }}
           WEATHER: ${{ toJSON(on.weather.outputs.current.weather[0]) }}
           DAILY_TEMPERATURE: ${{ toJSON(on.weather.outputs.daily[0].temp) }}
@@ -77,7 +79,7 @@ jobs:
               return new Date(value * 1000).toLocaleString(LOCALE, DATE_FORMAT);
             };
 
-            console.log(JSON.stringify(WEATHER_DATA));
+            //console.log(JSON.stringify(WEATHER_DATA));
 
             const longitude = WEATHER_DATA.lon;
             console.log(longitude);
