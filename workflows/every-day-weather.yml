@@ -25,6 +25,7 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
+          W: ${{ on.weather.outputs }}
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
           LONGITUDE: ${{ on.weather.outputs.lon }}
           LATITUDE: ${{ on.weather.outputs.lat }}
@@ -93,6 +94,8 @@ jobs:
             };
 
             console.log(JSON.stringify(WEATHER_DATA));
+            console.log(process.env.W.lon);
+            console.log(JSON.parse(process.env.W).lon);
 
             const wind = Math.round(CURRENT_WIND_SPEED);
             const windDirection = formatSideDirection(CURRENT_WIND_DEG);
@@ -107,11 +110,11 @@ jobs:
             result += `temperature: ${CURRENT_TEMP}°C [${DAILY_TEMP_MIN}-${DAILY_TEMP_MAX}°C] (${WEATHER_MAIN}, ${WEATHER_DESCRIPTION}), fells like ${CURRENT_FEELS_LIKE}°C,\n`;
             result += `humidity: ${CURRENT_HUMIDITY}%,\n`;
             result += `pressure: ${CURRENT_PRESSURE} (mbar),\n`;
-            result += `visibility: ${CURRENT_VISIBILITY},\n`;
-            result += `uvi: ${CURRENT_UVI},\n`;
+            result += `visibility: ${CURRENT_VISIBILITY} metres,\n`;
+            result += `UV index: ${CURRENT_UVI},\n`;
             result += `wind: /${windDirection}/ ${wind} (m/s),\n`;
             result += `cloudy: ${CURRENT_CLOUDS}%,\n\n`;
-            result += `today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.`;
+            result += `today, the Sun rises at ${sunrise} am and sets at ${sunset} pm.`;
             result += '---\n';
 
             return result;
