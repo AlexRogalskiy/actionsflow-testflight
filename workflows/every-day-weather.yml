@@ -15,10 +15,33 @@ jobs:
     name: Send notifications
     runs-on: ubuntu-latest
     steps:
+      - name: View context attributes
+        uses: actions/github-script@v4
+        with:
+          script: |
+            console.log(context)
+
+      - name: View weather attributes
+        uses: actions/github-script@v4
+        with:
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          script: |
+            console.log(JSON.stringify(${{ on.weather.outputs }}))
+
+      - name: Prepare a telegram message
+        uses: actions/github-script@v4
+        id: message
+        env:
+          WEATHER_DATA: '${{ on.weather.outputs }}'
+        with:
+          script: |
+            const script = require('./github/scripts/weather.js')
+            return script()
+          result-encoding: string
+
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: |
-            The weather is ${{ on.weather.outputs.current.weather[0].description }} now, ${{ on.weather.outputs.daily[0].temp.min }} - ${{ on.weather.outputs.daily[0].temp.max }}°, fells like ${{ on.weather.outputs.current.feels_like }}°, pressure: ${{ on.weather.outputs.current.pressure }}, humidity: ${{ on.weather.outputs.current.humidity }}, uv: ${{ on.weather.outputs.current.uvi }}
+          message: ${{ steps.message.outputs.result }}
