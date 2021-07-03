@@ -74,9 +74,9 @@ jobs:
               return new Date(value * 1000).toLocaleString(config.LOCALE, config.DATE_FORMAT);
             };
 
-            console.log(Object.getOwnPropertyNames(WEATHER_DATA));
             console.log(JSON.stringify(WEATHER_DATA));
-            const data = WEATHER_DATA;
+
+            const data = JSON.stringify(WEATHER_DATA);
 
             const longitude = data.current.coord.lon;
             const latitude = data.current.coord.lat;
