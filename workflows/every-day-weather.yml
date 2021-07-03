@@ -25,7 +25,6 @@ jobs:
         uses: actions/github-script@v4
         id: message
         env:
-          W: ${{ toJSON(on.weather.outputs) }}
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
           LONGITUDE: ${{ on.weather.outputs.lon }}
           LATITUDE: ${{ on.weather.outputs.lat }}
@@ -94,8 +93,7 @@ jobs:
             };
 
             console.log(JSON.stringify(WEATHER_DATA));
-            console.log(process.env.W.lon);
-            console.log(JSON.parse(process.env.W).lon);
+            console.log(JSON.parse(WEATHER_DATA).lon);
 
             const wind = Math.round(CURRENT_WIND_SPEED);
             const windDirection = formatSideDirection(CURRENT_WIND_DEG);
