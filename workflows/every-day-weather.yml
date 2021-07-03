@@ -76,8 +76,9 @@ jobs:
 
             console.log(JSON.stringify(WEATHER_DATA));
 
-            const longitude = WEATHER_DATA.current.coord.lon;
-            const latitude = WEATHER_DATA.current.coord.lat;
+            const longitude = WEATHER_DATA.lon;
+            const latitude = WEATHER_DATA.lat;
+            const timezone = WEATHER_DATA.timezone;
 
             const main = WEATHER_DATA.current.weather[0].main;
             const description = WEATHER_DATA.current.weather[0].description;
@@ -100,7 +101,7 @@ jobs:
             const sunset = formatDateByPattern(WEATHER_DATA.current.sunset);
 
             return `
-                Currently, the weather in Saint-Petersburg (lon: ${longitude}, lat: ${latitude}) is:
+                Currently, the weather in <= Saint-Petersburg => (lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}) is:
 
                 temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,
 
