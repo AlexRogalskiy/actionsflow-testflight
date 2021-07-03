@@ -74,9 +74,8 @@ jobs:
               return new Date(value * 1000).toLocaleString(config.LOCALE, config.DATE_FORMAT);
             };
 
-            console.log(JSON.stringify(WEATHER_DATA));
-
             const data = JSON.stringify(WEATHER_DATA);
+            console.log(data);
 
             const longitude = data.current.coord.lon;
             const latitude = data.current.coord.lat;
@@ -87,25 +86,28 @@ jobs:
             const tempMin = data.daily[0].temp.min;
             const tempMax = data.daily[0].temp.max;
 
-            const temperature = Math.round(data.current.feels_like);
+            const temperature = Math.round(data.current.temp);
+            const temperatureLike = Math.round(data.current.feels_like);
             const pressure = Math.round(data.current.pressure);
             const humidity = Math.round(data.current.humidity);
-            const clouds = Math.round(data.current.clouds.all);
-            const wind = Math.round(data.current.wind.speed);
+            const visibility = Math.round(data.current.visibility);
+            const clouds = Math.round(data.current.clouds);
             const uvi = Math.round(data.current.uvi);
 
-            const windDirection = formatSideDirection(data.current.wind.deg);
+            const wind = Math.round(data.current.wind_speed);
+            const windDirection = formatSideDirection(data.current.wind_deg);
 
-            const sunrise = formatDateByPattern(data.current.sys.sunrise);
-            const sunset = formatDateByPattern(data.current.sys.sunset);
+            const sunrise = formatDateByPattern(data.current.sunrise);
+            const sunset = formatDateByPattern(data.current.sunset);
 
             return `
                 Currently, the weather in Saint-Petersburg (lon: ${longitude}, lat: ${latitude}) is:
 
-                temperature: ${tempMin}-${tempMax}°C (${main}, ${description}), fells like ${temperature}°C,
+                temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,
 
                 humidity: ${humidity}%,
                 pressure: ${pressure} (mbar),
+                visibility: ${visibility},
                 uvi: ${uvi},
 
                 wind: /${windDirection}/ ${wind} (m/s),
