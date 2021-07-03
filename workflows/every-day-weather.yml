@@ -28,14 +28,14 @@ jobs:
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
           CURRENT: ${{ toJSON(on.weather.outputs.current) }}
           WEATHER: ${{ toJSON(on.weather.outputs.current.weather[0]) }}
-          DAILY: ${{ toJSON(on.weather.outputs.daily[0]) }}
+          DAILY_TEMPERATURE: ${{ toJSON(on.weather.outputs.daily[0].temp) }}
         with:
           script: |
             /**
              * Process env variables
              * @type {string[]}
              */
-            const { WEATHER_DATA, CURRENT, WEATHER, DAILY } = process.env
+            const { WEATHER_DATA, CURRENT, WEATHER, DAILY_TEMPERATURE } = process.env
 
             /**
              * Side directions
@@ -86,8 +86,8 @@ jobs:
             const main = WEATHER.main;
             const description = WEATHER.description;
 
-            const tempMin = DAILY.temp.min;
-            const tempMax = DAILY.temp.max;
+            const tempMin = DAILY_TEMPERATURE.min;
+            const tempMax = DAILY_TEMPERATURE.max;
 
             const temperature = Math.round(CURRENT.temp);
             const temperatureLike = Math.round(CURRENT.feels_like);
