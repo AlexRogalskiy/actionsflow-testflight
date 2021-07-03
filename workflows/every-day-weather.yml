@@ -28,7 +28,7 @@ jobs:
           WEATHER_DATA: '${{ on.weather.outputs }}'
         with:
           script: |
-            const script = require('./.github/scripts/weather')
+            const script = require('./weather')
             return script()
           result-encoding: string
 
