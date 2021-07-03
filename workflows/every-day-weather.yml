@@ -104,15 +104,15 @@ jobs:
             let result = '';
             result += '---\n';
             result += `Currently, the weather in <Saint-Petersburg> is:\n\n`;
-            result += `location: [lon: ${LONGITUDE}, lat: ${LATITUDE}, timezone: ${TIMEZONE}],\n`;
+            result += `location: longitude: ${LONGITUDE}, latitude: ${LATITUDE}, timezone: ${TIMEZONE},\n`;
             result += `temperature: ${CURRENT_TEMP}°C [${DAILY_TEMP_MIN}-${DAILY_TEMP_MAX}°C] (${WEATHER_MAIN}, ${WEATHER_DESCRIPTION}), fells like ${CURRENT_FEELS_LIKE}°C,\n`;
             result += `humidity: ${CURRENT_HUMIDITY}%,\n`;
             result += `pressure: ${CURRENT_PRESSURE} (mbar),\n`;
             result += `visibility: ${CURRENT_VISIBILITY} metres,\n`;
             result += `UV index: ${CURRENT_UVI},\n`;
-            result += `wind: /${windDirection}/ ${wind} (m/s),\n`;
+            result += `wind: [${windDirection}] ${wind} (m/s),\n`;
             result += `cloudy: ${CURRENT_CLOUDS}%,\n\n`;
-            result += `today, the Sun rises at ${sunrise} am and sets at ${sunset} pm.`;
+            result += `today, the Sun rises at ${sunrise} am and sets at ${sunset} pm.\n`;
             result += '---\n';
 
             return result;
