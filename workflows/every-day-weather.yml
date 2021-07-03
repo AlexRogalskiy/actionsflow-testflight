@@ -103,21 +103,18 @@ jobs:
             const sunrise = formatDateByPattern(CURRENT.sunrise);
             const sunset = formatDateByPattern(CURRENT.sunset);
 
-            return `
-                Currently, the weather in <= Saint-Petersburg => (lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}) is:
+            let result = '';
+            result += `Currently, the weather in <= Saint-Petersburg => (lon: ${longitude}, lat: ${latitude}, timezone: ${timezone}) is:\n\n`;
+            result += `temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,\n`;
+            result += `humidity: ${humidity}%,\n`;
+            result += `pressure: ${pressure} (mbar),\n`;
+            result += `visibility: ${visibility},\n`;
+            result += `uvi: ${uvi},\n`;
+            result += `wind: /${windDirection}/ ${wind} (m/s),\n`;
+            result += `cloudy: ${clouds}%,\n\n`;
+            result += `today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.\n`;
 
-                temperature: ${temperature}°C [${tempMin}-${tempMax}°C] (${main}, ${description}), fells like ${temperatureLike}°C,
-
-                humidity: ${humidity}%,
-                pressure: ${pressure} (mbar),
-                visibility: ${visibility},
-                uvi: ${uvi},
-
-                wind: /${windDirection}/ ${wind} (m/s),
-                cloudy: ${clouds}%,
-
-                today, the Sun rises at ${sunrise}am and sets at ${sunset}pm.
-            `;
+            return result;
           result-encoding: string
 
       - name: Send a telegram message
