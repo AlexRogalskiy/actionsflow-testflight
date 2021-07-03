@@ -80,6 +80,7 @@ jobs:
             const latitude = WEATHER_DATA.lat;
             const timezone = WEATHER_DATA.timezone;
 
+            console.log(${{ on.weather.outputs.current.weather[0].description }});
             const main = WEATHER_DATA.current.weather[0].main;
             const description = WEATHER_DATA.current.weather[0].description;
 
