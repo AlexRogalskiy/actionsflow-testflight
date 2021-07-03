@@ -26,7 +26,7 @@ jobs:
         id: message
         env:
           WEATHER_DATA: ${{ toJSON(on.weather.outputs) }}
-          DD: ${{ on.weather.outputs.current.weather[0].description }}
+          DD: ${{ toJSON(on.weather.outputs.current) }}
         with:
           script: |
             /**
