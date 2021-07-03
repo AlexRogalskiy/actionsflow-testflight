@@ -1,0 +1,22 @@
+name: Digest weekend example
+
+on:
+  rss:
+    url: https://actionsflow.github.io/test-page/hn-rss.xml
+    config:
+      every: 28 13 * * 6,0
+
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{on.rss.outputs.title}}
+          contentSnippet: ${{on.rss.outputs.contentSnippet}}
+          link: ${{on.rss.outputs.link}}
+        run: |
+          echo title: $title
+          echo contentSnippet: $contentSnippet
+          echo link: $link

@@ -1,4 +1,4 @@
-name: A really complex example
+name: JsonPlaceholder example
 
 on:
   poll:
