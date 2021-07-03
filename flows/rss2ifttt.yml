@@ -1,0 +1,18 @@
+name: RSS to IFTTT
+
+on:
+  rss:
+    url: https://actionsflow.github.io/test-page/hn-rss.xml
+
+jobs:
+  ifttt:
+    name: Make a Request to IFTTT
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actionsflow/ifttt-webhook-action@v1
+        with:
+          event: notice
+          key: <use your ifttt key>
+          value1: ${{on.rss.outputs.title}}
+          value2: ${{on.rss.outputs.contentSnippet}}
+          value3: ${{on.rss.outputs.link}}

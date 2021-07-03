@@ -1,11 +1,12 @@
-name: Send RSS feeds
+name: RSS multiple data with filter
 
 on:
   rss:
-    url: https://hnrss.org/newest?points=300&count=3
+    url: https://actionsflow.github.io/test-page/hn-rss.xml
     config:
-      debug: true
-
+      filter:
+        title:
+          $regex: interviews
 jobs:
   print:
     name: Print

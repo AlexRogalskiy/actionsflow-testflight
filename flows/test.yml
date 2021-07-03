@@ -1,0 +1,23 @@
+name: Test
+
+on:
+  script:
+    run: |
+      return [
+        {
+          id: 6,
+          title: "i${{ secrets.EMAIL_USER }}test222${{ secrets.XX_TOKEN }}"
+        }
+      ]
+    deduplicationKey: id
+
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{on.script.outputs.title}}
+        run: |
+          echo title: $title tessdfsdafas ${{ secrets.XX_TOKEN }}

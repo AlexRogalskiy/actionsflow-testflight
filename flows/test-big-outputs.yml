@@ -1,0 +1,43 @@
+name: Big outputs
+
+on:
+  rss:
+    url:
+      # HN posts with over 500 points
+      - https://actionsflow.github.io/test-page/hn-rss.xml
+      - https://dev.to/feed
+    config:
+      format: |
+        // extract hostname from full url
+        item.hostname = new URL(item.link).hostname
+        return item;
+
+jobs:
+  notify:
+    name: Send notifications
+    runs-on: ubuntu-latest
+    steps:
+      # Used for debugging
+      - name: Print to console
+        env:
+          title: ${{ on.rss.outputs.title }}
+          link: ${{ on.rss.outputs.link }}
+          hostname: ${{ on.rss.outputs.hostname }}
+        run: |
+          echo title: $title
+          echo link: $link
+          echo hostname: $hostname
+  notify2:
+    name: Send notifications
+    runs-on: ubuntu-latest
+    steps:
+      # Used for debugging
+      - name: Print to console
+        env:
+          title: ${{ on.rss.outputs.title }}
+          link: ${{ on.rss.outputs.link }}
+          hostname: ${{ on.rss.outputs.hostname }}
+        run: |
+          echo title: $title
+          echo link: $link
+          echo hostname: $hostname

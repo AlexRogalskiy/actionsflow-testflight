@@ -74,31 +74,30 @@ jobs:
               return new Date(value * 1000).toLocaleString(config.LOCALE, config.DATE_FORMAT);
             };
 
-            const data = JSON.stringify(WEATHER_DATA);
-            console.log(data);
+            console.log(JSON.stringify(WEATHER_DATA));
 
-            const longitude = data.current.coord.lon;
-            const latitude = data.current.coord.lat;
+            const longitude = WEATHER_DATA.current.coord.lon;
+            const latitude = WEATHER_DATA.current.coord.lat;
 
-            const main = data.current.weather[0].main;
-            const description = data.current.weather[0].description;
+            const main = WEATHER_DATA.current.weather[0].main;
+            const description = WEATHER_DATA.current.weather[0].description;
 
-            const tempMin = data.daily[0].temp.min;
-            const tempMax = data.daily[0].temp.max;
+            const tempMin = WEATHER_DATA.daily[0].temp.min;
+            const tempMax = WEATHER_DATA.daily[0].temp.max;
 
-            const temperature = Math.round(data.current.temp);
-            const temperatureLike = Math.round(data.current.feels_like);
-            const pressure = Math.round(data.current.pressure);
-            const humidity = Math.round(data.current.humidity);
-            const visibility = Math.round(data.current.visibility);
-            const clouds = Math.round(data.current.clouds);
-            const uvi = Math.round(data.current.uvi);
+            const temperature = Math.round(WEATHER_DATA.current.temp);
+            const temperatureLike = Math.round(WEATHER_DATA.current.feels_like);
+            const pressure = Math.round(WEATHER_DATA.current.pressure);
+            const humidity = Math.round(WEATHER_DATA.current.humidity);
+            const visibility = Math.round(WEATHER_DATA.current.visibility);
+            const clouds = Math.round(WEATHER_DATA.current.clouds);
+            const uvi = Math.round(WEATHER_DATA.current.uvi);
 
-            const wind = Math.round(data.current.wind_speed);
-            const windDirection = formatSideDirection(data.current.wind_deg);
+            const wind = Math.round(WEATHER_DATA.current.wind_speed);
+            const windDirection = formatSideDirection(WEATHER_DATA.current.wind_deg);
 
-            const sunrise = formatDateByPattern(data.current.sunrise);
-            const sunset = formatDateByPattern(data.current.sunset);
+            const sunrise = formatDateByPattern(WEATHER_DATA.current.sunrise);
+            const sunset = formatDateByPattern(WEATHER_DATA.current.sunset);
 
             return `
                 Currently, the weather in Saint-Petersburg (lon: ${longitude}, lat: ${latitude}) is:

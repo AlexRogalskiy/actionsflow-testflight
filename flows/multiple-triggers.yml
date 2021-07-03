@@ -1,16 +1,12 @@
-name: Get Multiple data triggers
+name: Get Multiple triggers
 
 on:
   poll:
     url: https://jsonplaceholder.typicode.com/posts
     config:
       limit: 5
-      resultsPerWorkflow: 2
   rss:
     url: https://actionsflow.github.io/test-page/hn-rss.xml
-    config:
-      outputsMode: combine
-      resultsPerWorkflow: 3
 
 jobs:
   print:
@@ -35,15 +31,3 @@ jobs:
           echo title: $title
           echo contentSnippet: $contentSnippet
           echo link: $link
-  print2:
-    name: Print2
-    runs-on: ubuntu-latest
-    steps:
-      - name: Print Outputs For Poll
-        if: on.poll.outcome === 'success'
-        env:
-          title: ${{ on.poll.outputs.title }}
-          body: ${{ on.poll.outputs.body }}
-        run: |
-          echo "title2: $title"
-          echo "body2: $body"
