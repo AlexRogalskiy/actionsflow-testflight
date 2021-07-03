@@ -65,7 +65,7 @@ jobs:
             * @returns {string} formatted side direction
             */
             const formatSideDirection = value => {
-                return config.DIRECTIONS[Math.round(((value %= 360) < 0 ? value + 360 : value) / 45) % 8];
+                return DIRECTIONS[Math.round(((value %= 360) < 0 ? value + 360 : value) / 45) % 8];
             };
 
             /**
@@ -74,7 +74,7 @@ jobs:
             * @returns {string} short formatted date
             */
             const formatDateByPattern = value => {
-              return new Date(value * 1000).toLocaleString(config.LOCALE, config.DATE_FORMAT);
+              return new Date(value * 1000).toLocaleString(LOCALE, DATE_FORMAT);
             };
 
             console.log(JSON.stringify(WEATHER_DATA));
