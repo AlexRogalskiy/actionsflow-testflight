@@ -21,4 +21,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: |
-            The weather is ${{on.weather.outputs.current.weather[0].description}} now, ${{on.weather.outputs.daily[0].temp.min}}~${{on.weather.outputs.daily[0].temp.min}}°, fell like ${{ on.weather.outputs.current.feels_like }}°, uv: ${{ on.weather.outputs.current.uvi }}
+            The weather is ${{ on.weather.outputs.current.weather[0].description }} now, ${{ on.weather.outputs.daily[0].temp.min }} - ${{ on.weather.outputs.daily[0].temp.max }}°, fells like ${{ on.weather.outputs.current.feels_like }}°, pressure: ${{ on.weather.outputs.current.pressure }}, humidity: ${{ on.weather.outputs.current.humidity }}, uv: ${{ on.weather.outputs.current.uvi }}
