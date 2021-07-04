@@ -1,0 +1,46 @@
+name: RSS multiple data feeds
+
+on:
+  rss:
+    url:
+      - https://actionsflow.github.io/test-page/hn-rss.xml
+      - https://www.buzzfeed.com/world.xml
+    config:
+      limit: 15
+
+jobs:
+  notify:
+    name: Send notifications
+    runs-on: ubuntu-latest
+    steps:
+      - name: Prepare a telegram message
+        uses: actions/github-script@v4
+        id: message
+        env:
+          title: ${{ on.rss.outputs.title }}
+          contentSnippet: ${{ on.rss.outputs.contentSnippet }}
+          link: ${{ on.rss.outputs.link }}
+        with:
+          script: |
+            /**
+             * Process env variables
+             * @type {string[]}
+             */
+            const { title, contentSnippet, link } = process.env
+
+            let result = '';
+            result += '---\n';
+            result += `Title: ${title}\n\n`;
+            result += `Content: ${contentSnippet}\n`;
+            result += `Link: ${link}\n`;
+            result += '---\n';
+
+            return result;
+          result-encoding: string
+
+      - name: Send a telegram message
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ steps.message.outputs.result }}
