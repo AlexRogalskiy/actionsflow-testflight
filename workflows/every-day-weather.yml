@@ -1,4 +1,4 @@
-name: Send a telegram message abount today's weather every morning
+name: Send a telegram message about today's weather every morning
 
 on:
   weather:
