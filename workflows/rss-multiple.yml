@@ -5,8 +5,16 @@ on:
     url:
       - https://actionsflow.github.io/test-page/hn-rss.xml
       - https://www.buzzfeed.com/world.xml
+      - https://www.theguardian.com/uk/rss
+      - https://news.ycombinator.com/rss
+      - https://www.computerworld.com/index.rss
+      - https://www.informationweek.com/rss_simple.asp
+      - https://www.infoworld.com/index.rss
+      - https://www.computerweekly.com/rss/All-Computer-Weekly-content.xml
+      - https://www.reddit.com/r/InformationTechnology/.rss?format=xml
+      - https://www.itworldcanada.com/feed
     config:
-      limit: 15
+      limit: 60
 
 jobs:
   notify:
