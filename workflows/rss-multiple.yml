@@ -14,7 +14,6 @@ on:
       - https://www.reddit.com/r/InformationTechnology/.rss?format=xml
       - https://www.itworldcanada.com/feed
       - https://devcases.com/feed/
-      - https://developers.redhat.com/blog/tag/java/feed/
       - https://plumbr.io/blog/feed
       - https://www.thejavaprogrammer.com/feed
       - https://nodesource.com/blog/rss
