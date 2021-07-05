@@ -3,8 +3,7 @@ name: Quotes
 on:
   script:
     run: |
-      const result = await helpers.axios.get("https://styled-quotes.vercel.app/api?theme=buefy&layout=default")
-      return result.data
+      return `<a href="https://styled-quotes.vercel.app/api?theme=buefy&layout=default">Styled Quotes</a>`
 
 jobs:
   notify:
@@ -35,3 +34,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ steps.message.outputs.result }}
+          format: html
