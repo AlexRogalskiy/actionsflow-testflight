@@ -17,8 +17,20 @@ on:
       - https://plumbr.io/blog/feed
       - https://www.thejavaprogrammer.com/feed
       - https://nodesource.com/blog/rss
+      - https://understanding-hadoop-by-mahesh.blogspot.com/feeds/posts/default?alt=rss
+      - https://curatedsql.com/category/hadoop/feed/
+      - https://kognitio.com/blog/category/kognitio-on-hadoop/feed/
+      - http://www.hadoopinrealworld.com/blog/feed/
+      - https://mobiledevmemo.com/feed/
+      - https://androidsweets.ongoodbits.com/feed
+      - https://gizmodo.com/tag/android/rss
+      - https://medium.com/feed/tag/java
+      - https://android-arsenal.com/rss
+      - https://www.androidauthority.com/android-development/feed/
+      - https://superkotlin.com/blog/feed/
+      - https://talkingkotlin.com/feed
     config:
-      limit: 100
+      limit: 200
 
 jobs:
   notify:
