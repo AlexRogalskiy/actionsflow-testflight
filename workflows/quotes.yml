@@ -1,9 +1,13 @@
-name: RSS multiple data feeds
+name: Quotes
 
 on:
   script:
     config:
-      limit: 10
+      force: true
+      skipSchedule: true
+      manualRunEvent:
+        - workflow_dispatch
+        - push
     path: ./workflows/quotes.js
 
 jobs:
@@ -17,4 +21,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ fromJSON(on.script.outputs).message }}
-          format: html
