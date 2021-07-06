@@ -18,7 +18,7 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          outputs: ${{ fromJson(on.script.outputs).message }}
+          outputs: ${{ on.script.outputs.message }}
         run: |
           echo outputs: $outputs
 
