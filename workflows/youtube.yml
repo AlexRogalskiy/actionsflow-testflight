@@ -12,21 +12,25 @@ jobs:
     name: Print
     runs-on: ubuntu-latest
     steps:
-      - name: Print Outputs
+      - name: Prepare a telegram message
+        uses: actions/github-script@v4
         id: message
         env:
           title: ${{ on.youtube.outputs.title }}
           description: ${{ on.youtube.outputs.description }}
           link: ${{ on.youtube.outputs.link }}
-        run: |
-          let result = '';
-          result += '===\n';
-          result += `title: $title\n\n`;
-          result += `$description: $description\n`;
-          result += `$link: $link\n`;
-          result += '===\n';
+        with:
+          script: |
+            const { title, description, link } = process.env
 
-          return result;
+            let result = '';
+            result += '===\n';
+            result += `title: $title\n\n`;
+            result += `description: $description\n`;
+            result += `link: $link\n`;
+            result += '===\n';
+
+            return result;
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
