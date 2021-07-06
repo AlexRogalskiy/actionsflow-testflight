@@ -9,19 +9,24 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return {"message":"https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}
+      return {"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}
 
 jobs:
-  print:
-    name: Print
+  quotes:
+    name: Styled quotes
     runs-on: ubuntu-latest
     steps:
-      - name: Print Outputs
+      - name: Prepare a telegram message
+        uses: actions/github-script@v4
+        id: message
         env:
-          outputs: ${{ fromJson(on.script.outputs) }}
-        run: |
-          echo outputs: $outputs
-          echo message: $outputs.message
+          outputs: ${{ toJson(on.script.outputs) }}
+        with:
+          script: |
+            const { outputs } = process.env;
+
+            console.log(JSON.stringify(outputs));
+            console.log(JSON.parse(outputs).message);
 
 #      - name: Send a telegram message
 #        uses: appleboy/telegram-action@v0.1.0
