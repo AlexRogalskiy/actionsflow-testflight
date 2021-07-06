@@ -2,6 +2,12 @@ name: Styled Quotes
 
 on:
   script:
+    config:
+      force: true
+      skipSchedule: true
+      manualRunEvent:
+        - workflow_dispatch
+        - push
     run: |
       return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
 
