@@ -4,6 +4,8 @@ on:
   youtube:
     channel_id:
       - UCDRVc_LN4TSbD86Rl18l9kQ
+    playlist_id:
+      - PLMSfWtTQbh59WYlQj0Yk0p0dQtVprYZSQ
 
 jobs:
   print:
@@ -11,13 +13,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Print Outputs
+        id: message
         env:
-          title: ${{on.youtube.outputs.title}}
-          description: ${{on.youtube.outputs.description}}
-          link: ${{on.youtube.outputs.link}}
+          title: ${{ on.youtube.outputs.title }}
+          description: ${{ on.youtube.outputs.description }}
+          link: ${{ on.youtube.outputs.link }}
         run: |
-          echo '==='
-          echo title: $title
-          echo description: $description
-          echo link: $link
-          echo '==='
+          let result = '';
+          result += '===\n';
+          result += `title: $title\n\n`;
+          result += `$description: $description\n`;
+          result += `$link: $link\n`;
+          result += '===\n';
+
+          return result;
+
+      - name: Send a telegram message
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ steps.message.outputs.result }}
