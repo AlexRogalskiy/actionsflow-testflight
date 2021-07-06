@@ -40,4 +40,5 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          photo: ${{ steps.message.outputs.result }}
+#          photo: ${{ steps.message.outputs.result }}
+          photo: https://librecellular.org/_static/LC_logo_200w.png
