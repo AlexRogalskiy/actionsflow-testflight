@@ -33,7 +33,7 @@ jobs:
 
             console.log(JSON.stringify(outputs));
 
-            return `![](https://styled-quotes.vercel.app/api?theme=buefy&layout=default)`;
+            return JSON.stringify(outputs).message;
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
