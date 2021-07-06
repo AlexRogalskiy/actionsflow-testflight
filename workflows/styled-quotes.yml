@@ -33,7 +33,7 @@ jobs:
 
             console.log(JSON.stringify(outputs));
 
-            return `![Styled Quotes](https://styled-quotes.vercel.app/api?theme=nightowl&layout=zues)`;
+            return `<img width="100%" height="100%" src="https://styled-quotes.vercel.app/api?theme=default_repocard&layout=churchill" alt="Styled quotes" />`;
 #            return `[Styled Quotes](https://librecellular.org/_static/LC_logo_200w.png)`;
 
       - name: Send a telegram message
@@ -42,4 +42,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ steps.message.outputs.result }}
-          format: markdown
+          format: html
