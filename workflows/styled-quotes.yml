@@ -14,6 +14,7 @@ on:
       );
 
       return [{"message": result.data}]
+#      return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
 
 jobs:
   quotes:
