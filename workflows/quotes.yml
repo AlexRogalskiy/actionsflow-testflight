@@ -1,0 +1,23 @@
+name: Quotes
+
+on:
+  quotes:
+    url: "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"
+
+jobs:
+  quotes:
+    name: Send quotes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          message: ${{ fromJSON(on.quotes.outputs).message }}
+        run: |
+          echo message: message
+
+#      - name: Send a telegram message
+#        uses: appleboy/telegram-action@v0.1.0
+#        with:
+#          to: ${{ secrets.TELEGRAM_TO }}
+#          token: ${{ secrets.TELEGRAM_TOKEN }}
+#          message: ${{ fromJSON(on.script.outputs).message }}
