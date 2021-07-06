@@ -4,8 +4,8 @@ on:
   youtube:
     channel_id:
       - UCDRVc_LN4TSbD86Rl18l9kQ
-    playlist_id:
-      - PLMSfWtTQbh59WYlQj0Yk0p0dQtVprYZSQ
+      - UC5FY0q5MWuQBbDaaWZMag1A
+      - UCsooa4yRKGN_zEE8iknghZA
 
 jobs:
   print:
