@@ -78,12 +78,14 @@ jobs:
         id: quote
         with:
           script: |
-            return `<img src="https://styled-quotes.vercel.app/api?theme=buefy&layout=default" alt="Styled Quotes" />`;
+            const message = "https://styled-quotes.vercel.app/api?theme=buefy&layout=default";
+
+            return {message: message}
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: ${{ steps.quote.outputs.result }}
+          message: ${{ fromJSON(steps.quote.outputs.result).message }}
           format: html
