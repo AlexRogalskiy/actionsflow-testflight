@@ -1,0 +1,23 @@
+name: YouTube
+
+on:
+  youtube:
+    channel_id:
+      - UCDRVc_LN4TSbD86Rl18l9kQ
+
+jobs:
+  print:
+    name: Print
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Outputs
+        env:
+          title: ${{on.youtube.outputs.title}}
+          description: ${{on.youtube.outputs.description}}
+          link: ${{on.youtube.outputs.link}}
+        run: |
+          echo '==='
+          echo title: $title
+          echo description: $description
+          echo link: $link
+          echo '==='
