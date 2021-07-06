@@ -9,7 +9,11 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
+      const result = await helpers.axios.get(
+          "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"
+      );
+
+      return [{"message": result.data}]
 
 jobs:
   quotes:
@@ -35,4 +39,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ steps.message.outputs.result }}
-#          format: html
+          format: html
