@@ -1,7 +1,13 @@
-name: Styled Quotes
+name: Only manual run
 
 on:
   script:
+    config:
+      force: true
+      skipSchedule: true
+      manualRunEvent:
+        - workflow_dispatch
+        - push
     run: |
       return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
 
@@ -29,4 +35,3 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ steps.message.outputs.result }}
-#          format: html
