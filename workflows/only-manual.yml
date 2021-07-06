@@ -18,13 +18,14 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          outputs: ${{ on.script.outputs.message }}
+          outputs: ${{ fromJson(on.script.outputs) }}
         run: |
           echo outputs: $outputs
+          echo message: $outputs.message
 
 #      - name: Send a telegram message
 #        uses: appleboy/telegram-action@v0.1.0
 #        with:
 #          to: ${{ secrets.TELEGRAM_TO }}
 #          token: ${{ secrets.TELEGRAM_TOKEN }}
-#          message: ${{ fromJSON(on.script.outputs).message }}
+#          message: ${{ on.script.outputs.message }}
