@@ -33,7 +33,8 @@ jobs:
 
             console.log(JSON.stringify(outputs));
 
-            return `[](https://librecellular.org/_static/LC_logo_200w.png)`;
+            return `![Styled Quotes](https://styled-quotes.vercel.app/api?theme=nightowl&layout=zues)`;
+#            return `[Styled Quotes](https://librecellular.org/_static/LC_logo_200w.png)`;
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
