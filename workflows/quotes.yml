@@ -1,0 +1,20 @@
+name: RSS multiple data feeds
+
+on:
+  script:
+    config:
+      limit: 10
+    path: ./workflows/quotes.js
+
+jobs:
+  quotes:
+    name: Send quotes
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send a telegram message
+        uses: appleboy/telegram-action@v0.1.0
+        with:
+          to: ${{ secrets.TELEGRAM_TO }}
+          token: ${{ secrets.TELEGRAM_TOKEN }}
+          message: ${{ fromJSON(on.script.outputs).message }}
+          format: html
