@@ -9,7 +9,7 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return {"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}
+      return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
 
 jobs:
   quotes:
