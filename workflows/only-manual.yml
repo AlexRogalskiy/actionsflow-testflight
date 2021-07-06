@@ -9,7 +9,7 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return [{"message":"https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
+      return {"message":"https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}
 
 jobs:
   print:
@@ -18,10 +18,9 @@ jobs:
     steps:
       - name: Print Outputs
         env:
-          outputs: ${{ fromJson(on.script.outputs) }}
+          outputs: ${{ fromJson(on.script.outputs).message }}
         run: |
           echo outputs: $outputs
-          echo $outputs.message
 
 #      - name: Send a telegram message
 #        uses: appleboy/telegram-action@v0.1.0
