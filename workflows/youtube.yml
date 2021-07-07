@@ -26,9 +26,9 @@ jobs:
 
             let result = '';
             result += '===\n';
-            result += `title: $title\n\n`;
-            result += `description: $description\n`;
-            result += `link: $link\n`;
+            result += `title: ${title}\n\n`;
+            result += `description: ${description}\n`;
+            result += `link: ${link}\n`;
             result += '===\n';
 
             return result;
