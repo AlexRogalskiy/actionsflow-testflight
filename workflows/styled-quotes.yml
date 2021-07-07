@@ -34,7 +34,7 @@ jobs:
 
             console.log(JSON.stringify(outputs));
 
-            return JSON.parse(outputs).message;
+            return `[](${JSON.parse(outputs).message})`;
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
@@ -42,3 +42,4 @@ jobs:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
           message: ${{ steps.message.outputs.result }}
+          format: markdown
