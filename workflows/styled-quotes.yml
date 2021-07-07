@@ -34,7 +34,7 @@ jobs:
 
             console.log(JSON.stringify(outputs));
 
-            return ${JSON.parse(outputs).message;
+            return JSON.parse(outputs).message;
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.0
