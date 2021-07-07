@@ -6,6 +6,7 @@ on:
       - UCDRVc_LN4TSbD86Rl18l9kQ
       - UC5FY0q5MWuQBbDaaWZMag1A
       - UCsooa4yRKGN_zEE8iknghZA
+      - UCxoUc7Rar2q90Gu0nT2ffuQ
 
 jobs:
   print:

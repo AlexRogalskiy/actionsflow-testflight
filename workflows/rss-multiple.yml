@@ -29,6 +29,13 @@ on:
       - https://www.androidauthority.com/android-development/feed/
       - https://superkotlin.com/blog/feed/
       - https://talkingkotlin.com/feed
+      - http://www.thecrazyprogrammer.com/feed
+      - https://css-tricks.com/feed/
+      - https://stackabuse.com/rss/
+      - https://blog.jooq.org/feed/
+      - https://medium.com/feed/better-programming
+      - https://blog.codepen.io/feed/
+      - https://www.learnacademy.org/feed/
     config:
       limit: 200
 
