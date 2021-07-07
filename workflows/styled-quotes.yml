@@ -9,7 +9,8 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
+      # return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
+      return [{"message": "https://styled-screenshots.vercel.app/api?url=https://www.google.com/&width=450&height=250"}]
 
 #      const result = await helpers.axios.get(
 #          "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"
