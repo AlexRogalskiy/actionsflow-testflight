@@ -75,6 +75,12 @@ jobs:
 
             return JSON.parse(outputs).message;
 
+      - name: Show Folders
+        shell: bash
+        run: |
+          ls -la `${process.env.GITHUB_WORKSPACE}`
+          tree `${process.env.GITHUB_WORKSPACE}`
+
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.1
         with:
