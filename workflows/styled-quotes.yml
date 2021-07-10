@@ -34,13 +34,14 @@ on:
         const theme = "buefy";
         const layout = "default";
 
-        const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
+        // const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
+        const imageUrl = "https://clipart-best.com/img/heart/heart-clip-art-4.png";
         const filePath = "images";
         const fileName = "quote";
         const extension = "png";
 
-        // const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
-        const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, 'images', 'heart.png');
+        const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
+        //const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, 'images', 'heart.png');
         console.info(`Storing quote image by path: ${imagePath}`);
 
         return [{"message": imagePath}];
