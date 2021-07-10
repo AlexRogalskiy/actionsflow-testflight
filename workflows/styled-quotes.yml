@@ -80,5 +80,10 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message_file: "./images/heart.png"
+          message: |
+            The ${{ github.event_name }} event triggered second step.
+            show the github varable ref: ${{ github.ref }}
+            show the github varable commit: ${{ github.sha }}
+            show the github varable ref: {{ commit.ref }}
+            show the github varable commit: {{ commit.sha }}
 #          message_file: ${{ steps.message.outputs.result }}
