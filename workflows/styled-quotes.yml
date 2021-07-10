@@ -80,4 +80,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          photo: ${{ steps.message.outputs.result }}
+          message: ${{ steps.message.outputs.result }}
