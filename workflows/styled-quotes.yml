@@ -79,6 +79,5 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: send photo message
           photo: https://clipart-best.com/img/heart/heart-clip-art-4.png
           document: https://clipart-best.com/img/heart/heart-clip-art-4.png
