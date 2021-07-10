@@ -80,4 +80,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message_file: "https://styled-screenshots.vercel.app/api?width=450&height=250&url=https://www.google.com/"
+          message_file: "https://clipart-best.com/img/heart/heart-clip-art-4.png"
