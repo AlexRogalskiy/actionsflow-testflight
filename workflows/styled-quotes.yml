@@ -80,4 +80,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message: ${{ steps.message.outputs.result }}
+          photo: "https://styled-screenshots.vercel.app/api?url=https://www.google.com/&width=450&height=250"
