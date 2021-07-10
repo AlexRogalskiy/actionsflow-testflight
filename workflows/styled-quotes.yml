@@ -40,7 +40,8 @@ on:
         const fileName = "quote";
         const extension = "png";
 
-        const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
+        // const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
+        const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, 'images', 'heart.png');
         console.info(`Storing quote image by path: ${imagePath}`);
 
         return [{"message": imagePath}];
@@ -79,4 +80,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          photo: "./images/heart.png"
+          photo: ${{ steps.message.outputs.result }}
