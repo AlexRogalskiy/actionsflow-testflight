@@ -14,7 +14,7 @@ on:
       const fs = require('fs');
 
       const createImageBy = async (url, filePath, fileName, extension) => {
-        const imagePath = path.join(filePath, `${fileName}.${extension}`);
+        const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, filePath, `${fileName}.${extension}`);
         console.log(`Generating image with parameters: url=${url}, file=${imagePath}\n`);
 
         if (!fs.existsSync(filePath)) {
@@ -79,4 +79,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          photo: https://clipart-best.com/img/heart/heart-clip-art-4.png
+          photo: images/heart.png
