@@ -80,4 +80,5 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message_file: ${{ steps.message.outputs.result }}
+          message_file: "./images/heart.png"
+#          message_file: ${{ steps.message.outputs.result }}
