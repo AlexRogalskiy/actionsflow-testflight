@@ -1,0 +1,23 @@
+name: HN RSS
+
+on:
+  rss:
+    url: https://hnrss.org/newest?points=300
+    config:
+      outputsMode: combine
+      exportOutputs: true
+
+jobs:
+  outputs:
+    name: outputs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Get outputs
+        uses: actions/github-script@v2
+        env:
+          OUTPUTS_PATH: ${{ on.rss.outputs.path }}
+        with:
+          script: |
+            const outputs = require(`${process.env.GITHUB_WORKSPACE}/${process.env.OUTPUTS_PATH}`)
+            console.log('outputs',outputs)
+            return true

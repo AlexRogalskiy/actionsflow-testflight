@@ -9,7 +9,44 @@ on:
         - workflow_dispatch
         - push
     run: |
-      return [{"message": "https://styled-screenshots.vercel.app/api?url=https://www.google.com/&width=450&height=250"}]
+      const path = require('path');
+      const http = require('https');
+      const fs = require('fs');
+
+      const createImageBy = async (url, filePath, fileName, extension) => {
+        const imagePath = path.join(filePath, `${fileName}.${extension}`);
+        console.log(`Generating image with parameters: url=${url}, file=${imagePath}\n`);
+
+        if (!fs.existsSync(filePath)) {
+          fs.mkdirSync(filePath);
+        }
+
+        const image = await fs.createWriteStream(imagePath);
+        await http.get(url, resp => {
+          resp.pipe(image);
+        });
+
+        return imagePath;
+      }
+
+      try {
+        const target = "https://styled-quotes.vercel.app/api";
+        const theme = "buefy";
+        const layout = "default";
+
+        const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
+        const filePath = "images";
+        const fileName = "quote";
+        const extension = "svg";
+
+        const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
+        console.info(`Storing quote image by path: ${imagePath}`);
+
+        return [{"message": imagePath}];
+      } catch (e) {
+        log.error(`Cannot create quote image by path: ${filePath}/${fileName}.${extension}, message: ${e.message}`);
+      }
+#      return [{"message": "https://styled-screenshots.vercel.app/api?url=https://www.google.com/&width=450&height=250"}]
 #      return [{"message": "https://styled-quotes.vercel.app/api?theme=buefy&layout=default"}]
 
 #      const result = await helpers.axios.get(
