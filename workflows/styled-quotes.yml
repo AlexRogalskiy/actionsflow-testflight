@@ -34,8 +34,7 @@ on:
         const theme = "buefy";
         const layout = "default";
 
-        //const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
-        const imageUrl = "https://clipart-best.com/img/heart/heart-clip-art-4.png";
+        const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
         const filePath = "images";
         const fileName = "quote";
         const extension = "png";
@@ -80,4 +79,4 @@ jobs:
         with:
           to: ${{ secrets.TELEGRAM_TO }}
           token: ${{ secrets.TELEGRAM_TOKEN }}
-          message_file: "https://clipart-best.com/img/heart/heart-clip-art-4.png"
+          message_file: ${{ steps.message.outputs.result }}
