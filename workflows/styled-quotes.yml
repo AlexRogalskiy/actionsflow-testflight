@@ -78,7 +78,7 @@ jobs:
       - name: Show Folders
         shell: bash
         run: |
-          cd $GITHUB_WORKSPACE/workflow
+          cd $GITHUB_WORKSPACE/..
           ls -la
           pwd
 
