@@ -78,7 +78,9 @@ jobs:
       - name: Show Folders
         shell: bash
         run: |
-          ls -la $GITHUB_WORKSPACE
+          cd $GITHUB_WORKSPACE
+          ls -la
+          pwd
 
       - name: Send a telegram message
         uses: appleboy/telegram-action@v0.1.1
