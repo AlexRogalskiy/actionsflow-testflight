@@ -20,6 +20,28 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - uses: actions/checkout@v1
+
+      - name: "npm ci"
+        if: endsWith(github.ref, '-release')
+        run: npm ci
+
+      - name: "npm install"
+        if: endsWith(github.ref, '-release') == false
+        run: npm install
+
+      - name: "npm run build"
+        run: npm run build
+
+      - name: "check for uncommitted changes"
+        # Ensure no changes, but ignore node_modules dir since dev/fresh ci deps installed.
+        if: endsWith(github.ref, '-release')
+        run: |
+          git diff --exit-code --stat -- . ':!node_modules' \
+          || (echo "##[error] found changed files after build. please 'npm run build && npm run format'" \
+                "and check in all changes" \
+           && exit 1)
+
       - name: Notifier
         uses: GokulDas027/TelegramBridge@master
         if: always()
