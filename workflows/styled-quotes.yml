@@ -14,7 +14,8 @@ on:
       const fs = require('fs');
 
       const createImageBy = async (url, filePath, fileName, extension) => {
-        const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, filePath, `${fileName}.${extension}`);
+        const target = process.env.GITHUB_WORKSPACE || "";
+        const imagePath = path.join(target, filePath, `${fileName}.${extension}`);
         console.log(`Generating image with parameters: url=${url}, file=${imagePath}\n`);
 
         if (!fs.existsSync(filePath)) {
@@ -34,14 +35,13 @@ on:
         const theme = "buefy";
         const layout = "default";
 
-        // const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
-        const imageUrl = "https://clipart-best.com/img/heart/heart-clip-art-4.png";
+        const imageUrl = `${target}?theme=${theme}&layout=${layout}`;
+        //const imageUrl = "https://clipart-best.com/img/heart/heart-clip-art-4.png";
         const filePath = "images";
         const fileName = "quote";
-        const extension = "png";
+        const extension = "svg";
 
         const imagePath = await createImageBy(imageUrl, filePath, fileName, extension);
-        //const imagePath = path.join(`${process.env.GITHUB_WORKSPACE}`, 'images', 'heart.png');
         console.info(`Storing quote image by path: ${imagePath}`);
 
         return [{"message": imagePath}];

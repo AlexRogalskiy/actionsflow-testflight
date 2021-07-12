@@ -5,7 +5,7 @@ on:
     url: https://reddit.com/hot/
     config:
       every: "0 7 * * *"
-      timeZone: UTC+3
+      timeZone: "Europe/Moscow"
       outputsMode: combine
 
 jobs:

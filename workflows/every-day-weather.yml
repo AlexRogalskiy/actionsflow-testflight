@@ -8,7 +8,7 @@ on:
       lon: 30.2642
       units: metric
     every: 0
-    timeZone: UTC+3
+    timeZone: "Europe/Moscow"
 
 jobs:
   notify:
