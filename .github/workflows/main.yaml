@@ -14,9 +14,6 @@ on:
     types: [ "created" ]
   push:
 
-env:
-  OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
-
 jobs:
   build:
     name: Notifier
@@ -34,6 +31,8 @@ jobs:
         run: npm install
 
       - name: "npm run build"
+        env:
+          OPENWEATHERMAP_API_KEY: ${{ secrets.OPENWEATHERMAP_API_KEY }}
         run: npm run build
 
       - name: "check for uncommitted changes"
